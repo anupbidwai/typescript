@@ -20,7 +20,10 @@ const Button = (props: ButtonProps) => {
 };
 
 
-const Input = (props: InputProps) => <input {...props} />;
+const Input = (props: InputProps) => {
+    const { type = "text", ...rest } = props;
+    return <input type={type} {...rest} />;
+};
 
 
 export {
