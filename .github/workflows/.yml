@@ -1,0 +1,23 @@
+name: Auto Tag Creation
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate tag
+        id: tag
+        run: |
+          # Add your script here to generate a tag, e.g., using versioning logic or commit information
+          echo "::set-output name=tag::v1.0.0"
+
+      - name: Create tag
+        run: |
+          git tag ${{ steps.tag.outputs.tag }}
+          git push origin ${{ steps.tag.outputs.tag }}

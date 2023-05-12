@@ -1,2 +1,0 @@
-- name: Auto tag
-  uses: Klemensas/action-autotag@1.2.3
