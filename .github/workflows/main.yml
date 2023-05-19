@@ -1,16 +1,17 @@
-name: Auto.Tag
-
+name: Auto Generate Tag
 on:
-  - push
-
+  push:
+    branches:
+      - main
 jobs:
-  tag:
+  auto-generate-tag:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 12
     steps:
-      - uses: phish108/autotag-action@v1.1.55
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN}}
+          node-version: 16.x
+      - run: npm install
+      - run: npm run build
+      - run: git tag v$(node -p "require('./package.json').version")
+      - run: git push origin v$(node -p "require('./package.json').version")
