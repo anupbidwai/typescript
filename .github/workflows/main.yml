@@ -12,5 +12,6 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install
+      - run: npm build
       - run: git tag v$(node -p "require('./package.json').version")
       - run: git push origin v$(node -p "require('./package.json').version")
