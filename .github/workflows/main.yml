@@ -1,16 +1,2 @@
-name: Auto Generate Tag
-on:
-  push:
-    branches:
-      - main
-jobs:
-  auto-generate-tag:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - run: npm install
-      - run: git tag v$(node -p "require('./package.json').version")
-      - run: git push origin v$(node -p "require('./package.json').version")
+- name: Auto tag
+  uses: Klemensas/action-autotag@1.2.3
