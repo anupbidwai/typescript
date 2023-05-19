@@ -60,7 +60,7 @@ const Home = () => {
   };
 
   // app reducer
-  const reducer = (state: UserType, action: ActionType) => {
+  const reducer = (state: any, action: ActionType) => {
     const { name: field } = action.payload;
     const { user } = state;
     switch (action.type) {
