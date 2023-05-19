@@ -3,7 +3,10 @@ import { Button, Input } from "@/components/Elements";
 import validator from "validator";
 
 const Home = () => {
-  const [formErrors, serFormErrors] = useState({});
+  const [formErrors, serFormErrors] = useState({
+    email: "",
+    password: ""
+  });
 
   type UserType = {
     user: {
@@ -125,7 +128,7 @@ const Home = () => {
   // form submission
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const fe = validateForm(user);
+    const fe: any = validateForm(user);
     serFormErrors(fe);
   };
 
