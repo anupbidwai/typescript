@@ -3,10 +3,9 @@ import { Button, Input } from "@/components/Elements";
 import validator from "validator";
 
 const Home = () => {
-
   const [formErrors, serFormErrors] = useState({});
 
-  type stateType = {
+  type UserType = {
     user: {
       email: {
         value: string,
@@ -26,7 +25,7 @@ const Home = () => {
     }
   }
 
-  type actionType = {
+  type ActionType = {
     type: string,
     payload: {
       name: string,
@@ -40,7 +39,7 @@ const Home = () => {
   };
 
   // default state
-  const initialArgs = {
+  const initialState = {
     user: {
       email: {
         value: "",
@@ -61,7 +60,7 @@ const Home = () => {
   };
 
   // app reducer
-  const reducer = (state: stateType, action: actionType) => {
+  const reducer = (state: UserType, action: ActionType) => {
     const { name: field } = action.payload;
     const { user } = state;
     switch (action.type) {
@@ -82,7 +81,7 @@ const Home = () => {
   };
 
   // 
-  const [state, dispatch] = useReducer(reducer, initialArgs);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { user } = state;
 
   // input change
@@ -112,10 +111,8 @@ const Home = () => {
               errorMessage = message[rule];
             }
         }
-        if (errorMessage) {
-          if (message?.hasOwnProperty(rule)) {
-            errors.push(errorMessage);
-          }
+        if (errorMessage && message?.[rule]) {
+          errors.push(errorMessage);
         }
         if (errors.length > 0) {
           fieldErrors[field] = errors;
